@@ -8,13 +8,7 @@ CREATE  TABLE users (
   email VARCHAR(255) NOT NULL, 
   password VARCHAR(255) NOT NULL
 );
-CREATE TABLE reservations (
-  id SERIAL PRIMARY KEY, 
-  start_date Date NOT NULL,
-  end_date DATE,
-  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
-  guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-);
+
 CREATE TABLE properties (
    id SERIAL PRIMARY KEY, 
    owner_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -32,6 +26,13 @@ CREATE TABLE properties (
    province VARCHAR(255) NOT NULL,
    post_code VARCHAR(255) NOT NULL, 
    active BOOLEAN NOT NULL
+);
+CREATE TABLE reservations (
+  id SERIAL PRIMARY KEY, 
+  start_date DATE NOT NULL,
+  end_date DATE,
+  property_id INTEGER REFERENCES properties(id) ON DELETE CASCADE,
+  guest_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
 CREATE TABLE property_reviews (
    id SERIAL PRIMARY KEY, 
